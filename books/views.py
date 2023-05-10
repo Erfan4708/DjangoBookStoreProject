@@ -22,7 +22,7 @@ class BookUpdateView(generic.UpdateView):
     model = Book
     template_name = 'books/book_update.html'
     fields = ['title' , 'author' , 'description' ,'price']
-    success_url = reverse_lazy('book_list')
+    # success_url = reverse_lazy('book_detail')
 
 class BookDeleteView(generic.DeleteView):
     model = Book

@@ -4,9 +4,5 @@
 {% endblock page_title %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <p>Hi {{ user.username }} | <a href= {% url 'logout' %} > Log out</a></p>
-    {% else %}
-        <a href= {% url 'login' %}>LogIn</a> | <a href = {% url 'signup' %}>Sign Up</a>
-    {% endif %}
+
 {% endblock content %}
