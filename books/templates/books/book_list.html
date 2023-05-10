@@ -5,8 +5,11 @@
 {% endblock title %}
 
 {% block content %}
+    <div class="container">
     {% for book in books %}
         <a class="list-group-item list-group-item-action" href= {{ book.get_absolute_url }}> {{ book.title }} </a>
         <br>
     {% endfor %}
+    <a class= "btn btn-success" href={% url 'add_book' %}> اضافه کردن کتاب جدید </a>
+    </div>
 {% endblock content %}

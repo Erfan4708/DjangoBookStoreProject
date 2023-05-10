@@ -1,0 +1,14 @@
+{% extends '_html.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    اضافه کردن کتاب {{ book.title }}
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-success" type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock content %}
