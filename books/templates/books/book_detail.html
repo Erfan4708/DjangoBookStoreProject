@@ -10,5 +10,7 @@
     <p>{{ book.description }}</p>
     <p>{{ book.price }}</p>
     <br>
-    <a href={% url 'book_list' %}>لیست همه کتاب ها</a>
+    <a class="btn btn-info" href={% url 'book_list' %}>لیست همه کتاب ها</a>
+    <a class="btn btn-success" href={% url 'book_update' book.id %}>ویرایش کتاب</a>
+    <a class="btn btn-danger" href={% url 'book_delete' book.id %}>حذف کتاب</a>
 {% endblock content %}
