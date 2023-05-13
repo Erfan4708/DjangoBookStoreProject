@@ -5,6 +5,9 @@ from django.urls import reverse
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=111)
+    translator = models.CharField(max_length=111)
+    publishers = models.CharField(max_length=111)
+    author = models.CharField(max_length=111)
     description = models.TextField()
     price = models.DecimalField(max_digits=5 , decimal_places=2)
 

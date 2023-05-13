@@ -15,13 +15,13 @@ class BookDetailView(generic.DetailView):
 class AddBook(generic.CreateView):
     model = Book
     template_name = 'books/add_book.html'
-    fields = ['title' , 'author' , 'description' ,'price']
+    fields = ['title' , 'author' ,'translator','publishers' , 'description' ,'price' ]
 
 
 class BookUpdateView(generic.UpdateView):
     model = Book
     template_name = 'books/book_update.html'
-    fields = ['title' , 'author' , 'description' ,'price']
+    fields = ['title' , 'author' ,'translator','publishers' , 'description' ,'price' ]
     # success_url = reverse_lazy('book_detail')
 
 class BookDeleteView(generic.DeleteView):
