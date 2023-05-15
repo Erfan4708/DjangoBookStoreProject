@@ -1,9 +1,9 @@
 from django.views import generic
-from .models import Book
-from django.urls import reverse_lazy
+from .models import Book , Comment
+from django.urls import reverse_lazy ,reverse
 from django.shortcuts import get_object_or_404 , render
 from .forms import CommentForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 # Create your views here.
 
 class BookListView(generic.ListView):
@@ -45,13 +45,30 @@ class AddBook(LoginRequiredMixin ,generic.CreateView):
     fields = ['title' , 'author' ,'translator','publishers' , 'description' ,'price' , 'cover' ]
 
 
-class BookUpdateView(LoginRequiredMixin,generic.UpdateView):
+class BookUpdateView(LoginRequiredMixin,UserPassesTestMixin,generic.UpdateView):
     model = Book
     template_name = 'books/book_update.html'
     fields = ['title' , 'author' ,'translator','publishers' , 'description' ,'price' , 'cover' ]
     # success_url = reverse_lazy('book_detail')
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
 
-class BookDeleteView(LoginRequiredMixin,generic.DeleteView):
+class BookDeleteView(LoginRequiredMixin , UserPassesTestMixin ,generic.DeleteView):
     model = Book
     template_name = 'books/book_delete.html'
     success_url = reverse_lazy('book_list')
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+
+
+class CommentDeleteView(LoginRequiredMixin , UserPassesTestMixin ,generic.DeleteView):
+    model = Comment
+    template_name = 'books/comment_delete.html'
+    # success_url = reverse_lazy('book_detail' ,kwargs={'pk': self.pk})
+    def get_success_url(self) -> str:
+        return reverse_lazy('book_detail', kwargs={'pk': self.object.pk})
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user

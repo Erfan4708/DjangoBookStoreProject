@@ -31,8 +31,10 @@
                                 {{ book.price }} تومان
                             </h3>
                             <a class="btn btn-info" href={% url 'book_list' %}>لیست همه کتاب ها</a>
-                            <a class="btn btn-success" href={% url 'book_update' book.id %}>ویرایش کتاب</a>
-                            <a class="btn btn-danger" href={% url 'book_delete' book.id %}>حذف کتاب</a>
+                            {% if book.user == user %}
+                                <a class="btn btn-danger" href={% url 'book_delete' book.id %}>حذف کتاب</a>
+                                <a class="btn btn-success" href={% url 'book_update' book.id %}>ویرایش کتاب</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -56,6 +58,9 @@
                                         <h5>این کتاب را پیشنهاد نمیکنم</h5>
                                     {% endif %}
                                     <p>{{ comment.text|linebreaks }}</p>
+                                    {% if comment.user == user %}
+                                        <a class="btn btn-danger" href="{% url 'comment_delete' comment.id %}">حذف نظر</a>
+                                    {% endif %}
                                 </div>
                             {% endif %}
 
